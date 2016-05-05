@@ -9,13 +9,14 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import numpy as np
 
-n = 20.0 # input for num of x
-m = 40.0 # input for num of time 
+#changed the input
+n = 10.0 # input for num of x
+m = 50.0 # input for num of time 
 x_minus = 0.0 # input of starting point 
 x_plus = 10.0 #input of ending point 
 r = 5.0 # any given for absolute value of x
 c = 5.0 # any constant value 
-time = 20.0 #in sec
+time = 1.0 #in sec
 tau = time/m # the variable "time" divides into num of m
 h = (x_plus-x_minus)/n # the  variable "x1 to x2
 alpha = (c*tau)/(h*h) # 差分方程式のalpha
@@ -23,7 +24,6 @@ alpha = (c*tau)/(h*h) # 差分方程式のalpha
 y = np.arange(0, time, tau)
 x = np.arange(0, x_plus, h)
 X, Y = np.meshgrid(x, y)
-print(X.shape)
 fig = plt.figure()
 ax = Axes3D(fig)
 
@@ -64,15 +64,16 @@ j_counter = 0
 u_new = 0
 temp = 0.
 
+#fixed by multiplying alpha for the third term
 while k < time:
     while j < x_plus:
         if j == 0:
-            arr_2d[k_counter].append((((-1)*(alpha*arr_2d[(k_counter-1)][(j_counter)]+(1-2*alpha)*arr_2d[(k_counter-1)][(j_counter + 1)]+arr_2d[(k_counter-1)][j_counter+2]))))
+            arr_2d[k_counter].append((((-1)*(alpha*arr_2d[(k_counter-1)][(j_counter)]+(1-2*alpha)*arr_2d[(k_counter-1)][(j_counter + 1)]+alpha*arr_2d[(k_counter-1)][j_counter+2]))))
         try:
-            arr_2d[k_counter].append(alpha*arr_2d[(k_counter-1)][(j_counter-1)]+(1-2*alpha)*arr_2d[(k_counter-1)][(j_counter)]+arr_2d[(k_counter-1)][j_counter+1])
+            arr_2d[k_counter].append(alpha*arr_2d[(k_counter-1)][(j_counter-1)]+(1-2*alpha)*arr_2d[(k_counter-1)][(j_counter)]+alpha*arr_2d[(k_counter-1)][j_counter+1])
         except IndexError:
             break
-            #arr_2d[k_counter].append(alpha*arr_2d[(k_counter-1)][(j_counter-2)]+(1-2*alpha)*arr_2d[(k_counter-1)][(j_counter-1)]+arr_2d[(k_counter-1)][j_counter])
+            #arr_2d[k_counter].append(alpha*arr_2d[(k_counter-1)][(j_counter-2)]+(1-2*alpha)*arr_2d[(k_counter-1)][(j_counter-1)]+alpha*arr_2d[(k_counter-1)][j_counter])
         j = j + h        
         j_counter = j_counter + 1
     j = 0
@@ -82,4 +83,5 @@ while k < time:
     
 Z = np.array(arr_2d)
 ax.plot_wireframe(X,Y,Z)
+print(Z)
 plt.show()
