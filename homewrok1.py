@@ -15,7 +15,7 @@ def f_of_x(j, r, h, length):
             j = j + h
         elif j == length:
             j = j - h
-        return 2*j*(1-j)
+        return -2*j*(1-j)
     return 0
     
 def calc(u,j,r,alpha):
@@ -31,18 +31,14 @@ def create_data(x_minus, x_plus, n, m, time, c, r ):
     alpha = (c*tau)/(h*h) # 差分方程式のalpha
 
     y = np.arange(0, time, tau)
-    x = np.arange(x_minus, x_plus+h, h)
+    x = np.arange(x_minus-0.5*h, x_plus+1.5*h, h)
     X, Y = np.meshgrid(x, y)
     fig = plt.figure()
     ax = Axes3D(fig)
-
-    k = 0
-
     arr_2d = []
-
-    while k < time:
+    
+    for i in X:
         arr_2d.append(x)
-        k = k + tau
 
     Z = np.array(arr_2d)
 
@@ -54,9 +50,14 @@ def create_data(x_minus, x_plus, n, m, time, c, r ):
             for l, k in enumerate(s):
                 Z[i][l] = calc(Z[i-1],l,r,alpha)
 
-
     ax.plot_wireframe(X,Y,Z)
     plt.show()
-    
-create_data(-10.0, 10.0, 10.0, 20.0, 1, 5, 11)
 
+
+create_data(10.0, -10.0, 10.0, 200.0, 71, 5, 5)
+create_data(10.0, -10.0, 10.0, 200.0, 1, 5, 5)
+"""i = 1
+while i < 71:
+    create_data(10.0, -10.0, 10.0, 200.0, i, 5, 5)
+    i = i + 1
+"""
