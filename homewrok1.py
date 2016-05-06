@@ -20,9 +20,9 @@ def f_of_x(j, r, h, length):
     
 def calc(u,j,r,alpha):
     if j == 0:
-        return (-1)*(alpha*u[j]+(1-2*alpha)*u[(j+1)]+alpha*u[j+2])
+        return 0#(-1)*(alpha*u[j]+(1-2*alpha)*u[(j+1)]+alpha*u[j+2])
     elif j == (len(u) - 1):
-        return (-1)*(alpha*u[j-2]+(1-2*alpha)*u[(j-1)]+alpha*u[j])
+        return 0#(-1)*(alpha*u[j-2]+(1-2*alpha)*u[(j-1)]+alpha*u[j])
     return alpha*u[j-1]+(1-2*alpha)*u[j]+alpha*u[j+1]
 
 def create_data(x_minus, x_plus, n, m, time, c, r ):
@@ -54,8 +54,8 @@ def create_data(x_minus, x_plus, n, m, time, c, r ):
     plt.show()
 
 
-create_data(10.0, -10.0, 10.0, 200.0, 71, 5, 5)
-create_data(10.0, -10.0, 10.0, 200.0, 1, 5, 5)
+create_data(20.0, -20.0, 20.0, 2000.0, 150, 5, 13)
+#create_data(20.0, -20.0, 10.0, 2000.0, 1, 5, 13)
 """i = 1
 while i < 71:
     create_data(10.0, -10.0, 10.0, 200.0, i, 5, 5)
