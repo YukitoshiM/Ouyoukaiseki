@@ -11,11 +11,11 @@ import numpy as np
 
 def f_of_x(j, r, h, length):
     if abs(j) < r:
-        if j == 0:
+        """if j == 0:
             j = j + h
         elif j == length:
-            j = j - h
-        return -2*j*(1-j)
+            j = j - h"""
+        return 2*j*(1-j) + 900
     return 0
     
 def calc(u,j,r,alpha):
@@ -54,10 +54,4 @@ def create_data(x_minus, x_plus, n, m, time, c, r ):
     plt.show()
 
 
-create_data(20.0, -20.0, 20.0, 2000.0, 150, 5, 13)
-#create_data(20.0, -20.0, 10.0, 2000.0, 1, 5, 13)
-"""i = 1
-while i < 71:
-    create_data(10.0, -10.0, 10.0, 200.0, i, 5, 5)
-    i = i + 1
-"""
+create_data(20.0, -20.0, 20.0, 2000.0, 120, 5, 10)
